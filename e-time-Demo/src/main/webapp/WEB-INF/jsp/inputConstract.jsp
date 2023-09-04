@@ -27,6 +27,10 @@
 	<p><c:out value="${break_time_errorMsg }" /></p>
 </c:if>
 休憩時間：<input type="text" name="break_time">(入力方法：1〜99の数字で入力してください)<br>
+<c:if test="${not empty user_id_errorMsg }" >
+	<p><c:out value="${user_id_errorMsg }" /></p>
+</c:if>
+勤務者：<input type="text" name="user_id">(ユーザーIDを入力してください)<br>
 <input type="submit" value="登録">
 </form>
 </body>

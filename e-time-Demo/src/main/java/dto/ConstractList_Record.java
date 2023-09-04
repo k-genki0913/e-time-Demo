@@ -3,21 +3,24 @@ package dto;
 import java.sql.Date;
 import java.sql.Time;
 
+import model.User_id_change_Name;
+
 public class ConstractList_Record {
-	private String constract_id;
+	private Integer constract_id;
 	private String workplace;
 	private Time start_time;
 	private Time end_time;
-	private Integer break_time;
 	private Integer work_time;
+	private Integer break_time;
 	private Integer is_valid;
 	private String user_id;
 	private Date constract_start;
 	private Date constract_end;
+	private String name;
 	
 	public ConstractList_Record() {}
 	
-	public ConstractList_Record(String constract_id, String workplace, Time start_time, Time end_time, Integer break_time, Integer work_time, Integer is_valid, String user_id, Date constract_start, Date constract_end) {
+	public ConstractList_Record(Integer constract_id, String workplace, Time start_time, Time end_time, Integer work_time, Integer break_time, Integer is_valid, String user_id, Date constract_start, Date constract_end) {
 		this.constract_id = constract_id;
 		this.workplace = workplace;
 		this.start_time = start_time;
@@ -28,12 +31,13 @@ public class ConstractList_Record {
 		this.user_id = user_id;
 		this.constract_start = constract_start;
 		this.constract_end = constract_end;
+		this.name = new User_id_change_Name().execute(user_id);
 	}
 	
-	public String getConstract_id() {
+	public Integer getConstract_id() {
 		return this.constract_id;
 	}
-	public void setConstract_id(String constract_id) {
+	public void setConstract_id(Integer constract_id) {
 		this.constract_id = constract_id;
 	}
 	
@@ -107,5 +111,9 @@ public class ConstractList_Record {
 	
 	public void setConstract_end(Date constract_end) {
 		this.constract_end = constract_end;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }

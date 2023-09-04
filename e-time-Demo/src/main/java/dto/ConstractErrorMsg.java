@@ -5,6 +5,7 @@ public class ConstractErrorMsg {
 	private String start_time_errorMsg;
 	private String end_time_errorMsg;
 	private String break_time_errorMsg;
+	private String user_id_errorMsg;
 	
 	public ConstractErrorMsg() {}
 	
@@ -38,5 +39,13 @@ public class ConstractErrorMsg {
 	
 	public void setBreak_time_errorMsg(String errorMsg) {
 		this.break_time_errorMsg = errorMsg;
+	}
+	
+	public String getUser_id_errorMsg() {
+		return this.user_id_errorMsg;
+	}
+	
+	public void setUser_id_errorMsg(String user_id_errorMsg) {
+		this.user_id_errorMsg = user_id_errorMsg;
 	}
 }
