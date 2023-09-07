@@ -2,6 +2,8 @@ package dto;
 
 public class ConstractErrorMsg {
 	private String workplace_errorMsg;
+	private String constract_start_errorMsg;
+	private String constract_end_errorMsg;
 	private String start_time_errorMsg;
 	private String end_time_errorMsg;
 	private String break_time_errorMsg;
@@ -15,6 +17,22 @@ public class ConstractErrorMsg {
 	
 	public void setWorkplace_errorMsg(String workplace_errorMsg) {
 		this.workplace_errorMsg = workplace_errorMsg;
+	}
+	
+	public String getConstract_start_errorMsg() {
+		return this.constract_start_errorMsg;
+	}
+	
+	public void setConstract_start_errorMsg(String constract_start_errorMsg) {
+		this.constract_start_errorMsg = constract_start_errorMsg;
+	}
+	
+	public String getConstract_end_errorMsg() {
+		return this.constract_end_errorMsg;
+	}
+	
+	public void setConstract_end_errorMsg(String constract_end_errorMsg) {
+		this.constract_end_errorMsg = constract_end_errorMsg;
 	}
 	
 	public String getStart_time_errorMsg() {

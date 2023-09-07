@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Calendar, model.Cnvrt_DayOfWeek" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,23 @@
 </head>
 <body>
 <h1>契約入力</h1>
+<c:if test="${not empty registErrorMsg }" >
+	<p><c:out value="${registErrorMsg }" /></p>
+</c:if>
 <form action="InputConstractServlet" method="POST">
 契約ID(自動で採番されます)<br>
 <c:if test="${not empty workplace_errorMsg }" >
 	<p><c:out value="${workplace_errorMsg }" /></p>
 </c:if>
 勤務先：<input type="text" name="workplace" required><br>
+<c:if test="${not empty constract_start_errorMsg }" >
+	<p><c:out value="${constract_start_errorMsg }" /></p>
+</c:if>
+契約開始日：<input type="text" name="constract_start">(入力例：2023-01-01 この方法で入力してください)<br>
+<c:if test="${not empty constract_end_errorMsg }" >
+	<p><c:out value="${constract_end_errorMsg }" /></p>
+</c:if>
+契約終了日：<input type="text" name="constract_end">(入力例：2023-03-31 この方法で入力してください)<br>
 <c:if test="${not empty start_time_errorMsg }" >
 	<p><c:out value="${start_time_errorMsg }" /></p>
 </c:if>
