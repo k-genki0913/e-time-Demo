@@ -11,11 +11,26 @@ public class Users_DTO implements Serializable, Comparable<Users_DTO>{
 	private String name;
 	private String mail_address;
 	private Integer admin;
+	private String str_admin;
 	private Integer is_valid;
+	private String str_is_valid;
 	private Date update_date;
 	private String update_user;
 	
 	public Users_DTO() {}
+	
+	public Users_DTO(String user_id, String name, String mail_address, 
+			Integer admin, Integer is_valid, Date update_date, String update_user) {
+		this.user_id = user_id;
+		this.name = name;
+		this.mail_address = mail_address;
+		this.admin = admin;
+		this.str_admin = adminChange(admin);
+		this.is_valid = is_valid;
+		this.str_is_valid = is_validChange(is_valid);
+		this.update_date = update_date;
+		this.update_user = update_user;
+	}
 	
 	public Users_DTO(String user_id, String name, String mail_address, 
 			Integer admin,  Date update_date, String update_user) {
@@ -23,7 +38,9 @@ public class Users_DTO implements Serializable, Comparable<Users_DTO>{
 		this.name = name;
 		this.mail_address = mail_address;
 		this.admin = admin;
+		this.str_admin = adminChange(admin);
 		this.is_valid = 1;
+		this.str_is_valid = is_validChange(is_valid);
 		this.update_date = update_date;
 		this.update_user = update_user;
 	}
@@ -72,12 +89,20 @@ public class Users_DTO implements Serializable, Comparable<Users_DTO>{
 		this.admin = admin;
 	}
 	
+	public String getStr_admin() {
+		return this.str_admin;
+	}
+	
 	public Integer getIs_valid() {
 		return this.is_valid;
 	}
 	
 	public void setIs_valid(Integer is_valid) {
 		this.is_valid = is_valid;
+	}
+	
+	public String getStr_is_valid() {
+		return this.str_is_valid;
 	}
 	
 	public Date getUpdate_date() {
@@ -94,6 +119,26 @@ public class Users_DTO implements Serializable, Comparable<Users_DTO>{
 	
 	public void setUpdate_user(String update_user) {
 		this.update_user = update_user;
+	}
+	
+	private String adminChange(Integer admin) {
+		String str_admin = "";
+		if(admin == 1) {
+			str_admin = "有";
+		} else {
+			str_admin = "無";
+		}
+		return str_admin;
+	}
+	
+	private String is_validChange(Integer is_valid) {
+		String str_is_valid = "";
+		if(is_valid == 1) {
+			str_is_valid = "有効";
+		} else {
+			str_is_valid = "無効";
+		}
+		return str_is_valid;
 	}
 	
 }
