@@ -10,13 +10,16 @@ public class Clock_in_DTO implements Serializable{
 	private Date clock_in_date;
 	private Integer clock_in_no;
 	private String work_pattern;
+	private String change_work_pattern;
 	private String work_remarks;
 	private String work_category;
+	private String change_work_category;
 	private Time start_time;
 	private Time end_time;
 	private Integer break_time;
 	private Integer over_time;
 	private Integer work_on_a_day;
+	private String str_work_on_a_day;
 	
 	public Clock_in_DTO() {}
 	
@@ -28,13 +31,16 @@ public class Clock_in_DTO implements Serializable{
 		this.clock_in_no = clock_in_no;
 		this.clock_in_date_branch = clock_in_date_branch;
 		this.work_pattern = work_pattern;
+		this.change_work_pattern = change_pattern(work_pattern);
 		this.work_remarks = work_remarks;
 		this.work_category = work_category;
+		this.change_work_category = change_category(work_category);
 		this.start_time = start_time;
 		this.end_time = end_time;
 		this.break_time = break_time;
 		this.over_time = over_time;
 		this.work_on_a_day = work_on_a_day;
+		this.str_work_on_a_day = change_work_on_a_day(work_on_a_day);
 	}
 	
 	public String getUser_id() {
@@ -75,6 +81,11 @@ public class Clock_in_DTO implements Serializable{
 	
 	public void setWork_pattern(String work_pattern) {
 		this.work_pattern = work_pattern;
+		this.change_work_pattern = change_pattern(work_pattern);
+	}
+	
+	public String getChange_work_pattern() {
+		return this.change_work_pattern;
 	}
 	
 	public String getWork_remarks() {
@@ -91,6 +102,11 @@ public class Clock_in_DTO implements Serializable{
 	
 	public void setWork_category(String work_category) {
 		this.work_category = work_category;
+		this.change_work_category = change_category(work_category);
+	}
+	
+	public String getChange_work_category() {
+		return this.change_work_category;
 	}
 	
 	public Time getStart_time() {
@@ -131,5 +147,48 @@ public class Clock_in_DTO implements Serializable{
 	
 	public void setWork_on_a_day(Integer work_on_a_day) {
 		this.work_on_a_day = work_on_a_day;
+		this.str_work_on_a_day = change_work_on_a_day(work_on_a_day);
+	}
+	
+	public String getStr_work_on_a_day() {
+		return this.str_work_on_a_day;
+	}
+	
+	private String change_pattern(String work_pattern) {
+		String change_work_pattern = "";
+		if(work_pattern != null) {
+			if(work_pattern.equals("normal")) {
+				change_work_pattern = "通常勤務";
+			}
+			if(work_pattern.equals("stated")) {
+				change_work_pattern = "大阪支店";
+			}
+		}
+		return change_work_pattern;
+	}
+	
+	private String change_category(String work_category) {
+		String change_work_category = "";
+		if(work_category != null){
+			if(work_category.equals("office")) {
+				change_work_category = "出社";
+			}
+			if(work_category.equals("home")) {
+				change_work_category = "在宅";
+			}
+			if(work_category.equals("other")) {
+				change_work_category = "その他";
+			}
+		}
+		return change_work_category;
+	}
+	
+	private String change_work_on_a_day(Integer work_on_a_day) {
+		String str_work_on_a_day = "";
+		if(work_on_a_day == 1) {
+			str_work_on_a_day = "⚫︎";
+		}
+		return str_work_on_a_day;
+		
 	}
 }

@@ -38,6 +38,10 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String user_id = (String) request.getParameter("user_id");
+		if(user_id == null) {
+			response.sendRedirect("UserListServlet");
+			return;
+		}
 		
 		Users_DTO users_DTO = new Users_DAO().getUser(user_id);
 		User_Password_DTO user_password_DTO = new User_Password_DAO().getUser_Password(user_id);
@@ -72,11 +76,20 @@ public class UserUpdateServlet extends HttpServlet {
 		String role_id = request.getParameter("role");
 		Integer department_id = Integer.parseInt(request.getParameter("department"));
 		
-		System.out.println(new_password);
-		
-		if(new_password != null || new_password != "" || new_password.length() != 0) {
-			userUpdateErrorMsg = userRegistCheck.inputCheck(user_id, new_password);
+		if(new_password != "" && new_password.length() != 0) {
+			userUpdateErrorMsg = userRegistCheck.updateCheck(new_password);
 			if(!userUpdateErrorMsg.equals("")) {
+			
+			Users_DTO users_DTO = new Users_DAO().getUser(user_id);
+			User_Password_DTO user_password_DTO = new User_Password_DAO().getUser_Password(user_id);
+			User_Role_DTO user_role_DTO = new User_Role_DAO().getUser_Role(user_id);
+			User_Department_DTO user_department_DTO = new User_Department_DAO().getUser_Department(user_id);
+				
+			request.setAttribute("users_DTO", users_DTO);
+			request.setAttribute("user_password_DTO", user_password_DTO);
+			request.setAttribute("user_role_DTO", user_role_DTO);
+			request.setAttribute("user_department_DTO", user_department_DTO);
+				
 			request.setAttribute("userUpdateErrorMsg", userUpdateErrorMsg);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
@@ -90,7 +103,7 @@ public class UserUpdateServlet extends HttpServlet {
 		
 		Users_DTO users_DTO = new Users_DTO(user_id, name, mail_address, admin, is_valid, updateDate, userRegister);
 		User_Password_DTO user_password_DTO = null;
-		if(new_password != null || new_password != "" || new_password.length() != 0) {
+		if(new_password != "" && new_password.length() != 0) {
 			user_password_DTO = new User_Password_DTO(user_id, new_password, updateDate, userRegister);
 		} else {
 			user_password_DTO = new User_Password_DTO(user_id, present_password, updateDate, userRegister);
@@ -101,6 +114,12 @@ public class UserUpdateServlet extends HttpServlet {
 		userUpdateErrorMsg = new UserUpdateTransactionDAO().userUpdate(users_DTO, user_password_DTO, user_role_DTO, user_department_DTO);
 		
 		if(!userUpdateErrorMsg.equals("")) {
+			
+			request.setAttribute("users_DTO", users_DTO);
+			request.setAttribute("user_password_DTO", user_password_DTO);
+			request.setAttribute("user_role_DTO", user_role_DTO);
+			request.setAttribute("user_department_DTO", user_department_DTO);
+			
 			request.setAttribute("userUpdateErrorMsg", userUpdateErrorMsg);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);

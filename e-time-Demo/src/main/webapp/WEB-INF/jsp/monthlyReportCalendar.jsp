@@ -27,6 +27,7 @@
 				<th>休憩時間</th>
 				<th>残業時間</th>
 				<th>休日出勤</th>
+				<th>編集</th>
 			</tr>
 			<c:forEach var="calendar" items="${calendarList }" >
 				<tr><c:choose>
@@ -46,8 +47,8 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${not empty calendar.work_pattern }">
-							<td><c:out value="${calendar.work_pattern }" /></td>
+						<c:when test="${not empty calendar.change_work_pattern }">
+							<td><c:out value="${calendar.change_work_pattern }" /></td>
 						</c:when>
 						<c:otherwise>
 							<td></td>
@@ -62,8 +63,8 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${not empty calendar.work_category }">
-							<td><c:out value="${calendar.work_category }" /></td>
+						<c:when test="${not empty calendar.change_work_category }">
+							<td><c:out value="${calendar.change_work_category }" /></td>
 						</c:when>
 						<c:otherwise>
 							<td></td>
@@ -87,7 +88,14 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${not empty calendar.break_time }">
-							<td><c:out value="${calendar.break_time }" /></td>
+							<c:choose>
+								<c:when test="${not empty calendar.start_time }">
+									<td><c:out value="${calendar.break_time }" /></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<td></td>
@@ -95,20 +103,31 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${not empty calendar.over_time }">
-							<td><c:out value="${calendar.over_time }" /></td>
+							<c:choose>
+								<c:when test="${not empty calendar.start_time }">
+									<td><c:out value="${calendar.over_time }" /></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<td></td>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${not empty calendar.work_on_a_day }">
-							<td><c:out value="${calendar.work_on_a_day }" /></td>
+						<c:when test="${not empty calendar.str_work_on_a_day }">
+							<td><c:out value="${calendar.str_work_on_a_day }" /></td>
 						</c:when>
 						<c:otherwise>
 							<td></td>
 						</c:otherwise>
 					</c:choose>
+					<td><form action="MonthlyReportUpdateServlet" method="GET">
+						<input type="hidden" name="clock_in_date_branch" value="${calendar.clock_in_date_branch }" >
+						<input type="submit" value="編集">
+						</form>
 				</tr>
 			</c:forEach>
 		</table>

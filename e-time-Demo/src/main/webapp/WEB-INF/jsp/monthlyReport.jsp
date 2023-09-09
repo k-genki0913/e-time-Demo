@@ -20,6 +20,15 @@
 <body>
 <h2>勤怠入力画面</h2>
 <h2><%= month %>月<%= day %>日　<%= day_of_week %></h2><br>
+<c:if test="${not empty start_time_errorMsg }" >
+	<p><c:out value="${start_time_errorMsg }" /></p>
+</c:if>
+<c:if test="${not empty end_time_errorMsg }" >
+	<p><c:out value="${end_time_errorMsg }" /></p>
+</c:if>
+<c:if test="${not empty break_time_errorMsg }" >
+	<p><c:out value="${break_time_errorMsg }" /></p><br>
+</c:if>
 <form action="MonthlyReportServlet" method="POST">
 <input type="hidden" name="year" value="<%= year %>">
 <input type="hidden" name="month" value="<%= month %>">
@@ -40,17 +49,8 @@
 <option value="home">在宅</option>
 <option value="other">その他</option>
 </select><br>
-<c:if test="${not empty start_time_errorMsg }" >
-	<p><c:out value="${start_time_errorMsg }" /></p>
-</c:if>
 開始時間：<input type="text" name="start_time" required> (例：0900)<br>
-<c:if test="${not empty end_time_errorMsg }" >
-	<p><c:out value="${end_time_errorMsg }" /></p>
-</c:if>
-終了時間：<input type="text" name="end_time" required> (例1830)<br>
-<c:if test="${not empty break_time_errorMsg }" >
-	<p><c:out value="${break_time_errorMsg }" /></p><br>
-</c:if>
+終了時間：<input type="text" name="end_time" required> (例：1830)<br>
 休憩時間：<input type="text" name="break_time" required>（分) (例 60)<br>
 勤怠備考：<input type="text" name="work_remarks"><br>
 出勤区分：<select name="work_on_a_day" required>

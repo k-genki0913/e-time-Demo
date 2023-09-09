@@ -62,6 +62,12 @@ public class UserRegistServlet extends HttpServlet {
 		//入力チェック：入力値が仕様に沿っているか確認し、沿っていない場合はuserRegistErrorMsgにエラー内容を格納してuserRegist.jspへ戻す
 		userRegistErrorMsg = userRegistCheck.inputCheck(user_id, password);
 		if(!userRegistErrorMsg.equals("")) {
+			request.setAttribute("input_user_id", user_id);
+			request.setAttribute("name", name);
+			request.setAttribute("mail_address", mail_address);
+			request.setAttribute("admin", admin);
+			request.setAttribute("role_id", role_id);
+			request.setAttribute("department_id", department_id);
 			request.setAttribute("userRegistErrorMsg", userRegistErrorMsg);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/userRegist.jsp");
 			dispatcher.forward(request, response);

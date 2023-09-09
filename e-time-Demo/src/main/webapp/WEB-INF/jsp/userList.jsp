@@ -46,5 +46,6 @@
 		</tr>
 	</c:forEach>
 </table>
+<a href="HomeServlet">ホーム画面へ戻る</a>
 </body>
 </html>

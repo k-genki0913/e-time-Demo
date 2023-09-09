@@ -19,4 +19,14 @@ public class UserRegistCheck {
 		}
 		return userRegistErrorMsg;
 	}
+	
+	public String updateCheck(String password) {
+		String userUpdateErrorMsg = "";
+		InputCheck inputCheck = new InputCheck();
+		
+		if(!inputCheck.inputPasswordCheck(password)) {
+			userUpdateErrorMsg = "パスワードがローマ字大文字小文字、数字、記号(-_)のうち３種類含み、8文字以上か確認してください";
+		}
+		return userUpdateErrorMsg;
+	}
 }

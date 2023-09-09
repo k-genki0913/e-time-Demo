@@ -17,13 +17,17 @@ public class UserUpdateTransactionDAO {
 		String userUpdateErrorMsg = "";
 		
 		String users_Sql = "UPDATE USERS "
-				+ "SET user_id = ?, name = ?, mail_address = ?, admin = ?, is_valid = ?, update_date = ?, update_user = ?";
+				+ "SET name = ?, mail_address = ?, admin = ?, is_valid = ?, update_date = ?, update_user = ? "
+				+ "WHERE user_id = ?";
 		String user_password_Sql = "UPDATE USER_PASSWORD "
-				+ "SET user_id = ?, password = ?, invalid_count = 0, update_date = ?, update_user = ?";
+				+ "SET password = ?, invalid_count = 0, update_date = ?, update_user = ? "
+				+ "WHERE user_id = ?";
 		String user_role_Sql = "UPDATE USER_ROLE "
-				+ "SET user_id = ?, role_id = ?, update_date = ?, update_user = ?";
+				+ "SET role_id = ?, update_date = ?, update_user = ? "
+				+ "WHERE user_id = ?";
 		String user_department_Sql = "UPDATE USER_DEPARTMENT "
-				+ "SET user_id = ?, department_id = ?, update_date = ?, update_user = ?";
+				+ "SET department_id = ?, update_date = ?, update_user = ? "
+				+ "WHERE user_id = ?";
 		
 		int users_Result = 0;
 		int user_Password_Result = 0;
@@ -37,13 +41,14 @@ public class UserUpdateTransactionDAO {
 			
 			pstmt = con.prepareStatement(users_Sql);
 			
-			pstmt.setString(1, users_DTO.getUser_id());
-			pstmt.setString(2, users_DTO.getName());
-			pstmt.setString(3, users_DTO.getMail_address());
-			pstmt.setInt(4, users_DTO.getAdmin());
-			pstmt.setInt(5, users_DTO.getIs_valid());
-			pstmt.setDate(6, users_DTO.getUpdate_date());
-			pstmt.setString(7, users_DTO.getUpdate_user());
+			
+			pstmt.setString(1, users_DTO.getName());
+			pstmt.setString(2, users_DTO.getMail_address());
+			pstmt.setInt(3, users_DTO.getAdmin());
+			pstmt.setInt(4, users_DTO.getIs_valid());
+			pstmt.setDate(5, users_DTO.getUpdate_date());
+			pstmt.setString(6, users_DTO.getUpdate_user());
+			pstmt.setString(7, users_DTO.getUser_id());
 			
 			users_Result = pstmt.executeUpdate();
 			
@@ -51,10 +56,10 @@ public class UserUpdateTransactionDAO {
 			
 			pstmt = con.prepareStatement(user_password_Sql);
 			
-			pstmt.setString(1, user_Password_DTO.getUser_id());
-			pstmt.setString(2, user_Password_DTO.getPassword());
-			pstmt.setDate(3, user_Password_DTO.getUpdate_date());
-			pstmt.setString(4, user_Password_DTO.getUpdate_user());
+			pstmt.setString(1, user_Password_DTO.getPassword());
+			pstmt.setDate(2, user_Password_DTO.getUpdate_date());
+			pstmt.setString(3, user_Password_DTO.getUpdate_user());
+			pstmt.setString(4, user_Password_DTO.getUser_id());
 			
 			user_Password_Result = pstmt.executeUpdate();
 			
@@ -62,10 +67,10 @@ public class UserUpdateTransactionDAO {
 			
 			pstmt = con.prepareStatement(user_role_Sql);
 			
-			pstmt.setString(1, user_Role_DTO.getUser_id());
-			pstmt.setString(2, user_Role_DTO.getRole_id());
-			pstmt.setDate(3, user_Role_DTO.getUpdate_date());
-			pstmt.setString(4, user_Role_DTO.getUpdate_user());
+			pstmt.setString(1, user_Role_DTO.getRole_id());
+			pstmt.setDate(2, user_Role_DTO.getUpdate_date());
+			pstmt.setString(3, user_Role_DTO.getUpdate_user());
+			pstmt.setString(4, user_Role_DTO.getUser_id());
 			
 			user_Role_Result = pstmt.executeUpdate();
 			
@@ -73,10 +78,10 @@ public class UserUpdateTransactionDAO {
 			
 			pstmt = con.prepareStatement(user_department_Sql);
 			
-			pstmt.setString(1, user_Department_DTO.getUser_id());
-			pstmt.setInt(2, user_Department_DTO.getDepartment_id());
-			pstmt.setDate(3, user_Department_DTO.getUpdateDate());
-			pstmt.setString(4, user_Department_DTO.getUpdateUser());
+			pstmt.setInt(1, user_Department_DTO.getDepartment_id());
+			pstmt.setDate(2, user_Department_DTO.getUpdateDate());
+			pstmt.setString(3, user_Department_DTO.getUpdateUser());
+			pstmt.setString(4, user_Department_DTO.getUser_id());
 			
 			user_Department_Result = pstmt.executeUpdate();
 			
