@@ -12,6 +12,9 @@
 <c:if test="${not empty resultMsg }">
 	<p><c:out value="${resultMsg }" /></p><br>
 </c:if>
+<c:if test="${not empty calendarErrorMsg }">
+	<p><c:out value="${calendarErrorMsg }" /></p>
+</c:if>
 <form action="CreateCalendarServlet" method="POST">
 <p>カレンダー作成</p>
 <select name="year" required>

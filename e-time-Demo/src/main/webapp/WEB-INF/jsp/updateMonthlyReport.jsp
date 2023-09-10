@@ -4,8 +4,14 @@
 <%
 	String user_id = (String) session.getAttribute("user_id");
 	Clock_in_DTO clock_in_DTO = (Clock_in_DTO)request.getAttribute("clock_in_DTO");
-	String str_start_time = clock_in_DTO.getStart_time().toString().substring(0, 2) + clock_in_DTO.getStart_time().toString().substring(3, 5);
-	String str_end_time = clock_in_DTO.getEnd_time().toString().substring(0, 2) + clock_in_DTO.getEnd_time().toString().substring(3, 5);
+	String str_start_time = "";
+	String str_end_time = "";
+	if(clock_in_DTO.getStart_time() != null){
+		str_start_time = clock_in_DTO.getStart_time().toString().substring(0, 2) + clock_in_DTO.getStart_time().toString().substring(3, 5);
+	} 
+	if(clock_in_DTO.getEnd_time() != null){
+		str_end_time = clock_in_DTO.getEnd_time().toString().substring(0, 2) + clock_in_DTO.getEnd_time().toString().substring(3, 5);
+	}
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Calendar" %>
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	Calendar calendar = (Calendar)request.getAttribute("calendar");
+	int year = calendar.get(Calendar.YEAR);
+	int month = calendar.get(Calendar.MONTH) + 1;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +16,19 @@
 <body>
 <a href="HomeServlet">ホーム画面へ戻る</a>
 <h1>勤怠カレンダー</h1>
+<h2><%=year %>年<%=month %>月</h2>
+<form action="CalendarServlet" method="POST">
+<input type="hidden" name="change" value="last">
+<input type="hidden" name="year" value="<%=year %>">
+<input type="hidden" name="month" value="<%=month %>">
+<input type="submit" value="前月">
+</form>
+<form action="CalendarServlet" method="POST">
+<input type="hidden" name="change" value="next">
+<input type="hidden" name="year" value="<%=year %>">
+<input type="hidden" name="month" value="<%=month %>">
+<input type="submit" value="翌月">
+</form>
 <c:choose>
 	<c:when test="${not empty calendarErrorMsg }">
 		<p><c:out value="${calendarErrorMsg }" /></p>

@@ -25,6 +25,15 @@ public class CreateCalendarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		String calendarErrorMsg = request.getParameter("calendarErrorMsg");
+		
+		if(calendarErrorMsg != null) {
+			request.setAttribute("calendarErrorMsg", calendarErrorMsg);
+		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/createMonthlyReportCalendar.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -45,8 +54,7 @@ public class CreateCalendarServlet extends HttpServlet {
 		
 		boolean reportExist = new ReportDataCheck().reportExist(user_id, clock_in_date_branch);
 		if(reportExist) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/monthlyReport.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("CalendarServlet");
 			return;
 		}
 		

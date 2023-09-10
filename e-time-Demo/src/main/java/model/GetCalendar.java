@@ -39,6 +39,28 @@ public class GetCalendar {
 		
 	}
 	
+	public List<Clock_in_DTO> change(String user_id, int year, int month){
+		List<Clock_in_DTO> calendarList = new ArrayList<>();
+		
+		int start_Day = 1;
+		int last_Day = getLastDay();
+		
+		Date start_date = changeDate(year, month, start_Day);
+		Date last_date = changeDate(year, month, last_Day);
+		
+		Clock_in_DAO clock_in_DAO = new Clock_in_DAO();
+		calendarList = clock_in_DAO.getCalendar(user_id, start_date, last_date);
+		
+		Comparator<Clock_in_DTO> comparator = Comparator.comparing(Clock_in_DTO::getClock_in_date).thenComparing(Clock_in_DTO::getClock_in_no);
+		
+		List<Clock_in_DTO> sortedCalendarList = calendarList.stream()
+															.sorted(comparator)
+															.collect(Collectors.toList());
+		
+		return sortedCalendarList;
+		
+	}
+	
 	private int getLastDay() {
 		Calendar calendar = Calendar.getInstance();
 		int thisYear = calendar.get(Calendar.YEAR);

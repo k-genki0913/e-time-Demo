@@ -4,11 +4,12 @@ import dao.User_Password_DAO;
 import dto.User_Password_DTO;
 
 public class LoginCheck {
-	//User_Passwordテーブルへの接続、SQL実行を行うインスタンスを生成
-		User_Password_DAO user_Password_DAO = new User_Password_DAO();
-		
+	User_Password_DAO user_Password_DAO = new User_Password_DAO();
+	
 		//User_Passwordテーブルからpasswordなどを取得し、入力値とデータベースの情報を比較しログイン可能か判定する
 		public User_Password_DTO loginCheck(String input_user_id, String input_password) {
+			
+			
 			//User_Password_DAOからの戻り値を受け取り、メソッド呼び出し元へ戻すインスタンスを生成
 			User_Password_DTO userLoginDTO = new User_Password_DTO();
 			

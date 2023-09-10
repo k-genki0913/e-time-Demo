@@ -17,7 +17,7 @@ public class CreateClock_in_DTO {
 		Time sql_start_time = getSqlTime(start_time);
 		Time sql_end_time = getSqlTime(end_time);
 		Integer sql_break_time = Integer.parseInt(break_time);
-		Integer over_time = calculate_over_time(year, month, day, start_time, end_time, sql_break_time);
+		Integer over_time = calculate_over_time(work_pattern, year, month, day, start_time, end_time, sql_break_time);
 		Integer sql_work_on_a_day = Integer.parseInt(work_on_a_day);
 		
 		Clock_in_DTO clock_in_DTO = new Clock_in_DTO(user_id, clock_in_date_branch, clock_in_date, clock_in_no,
@@ -39,14 +39,19 @@ public class CreateClock_in_DTO {
 		return sqlTime;
 	}
 	
-	public Integer calculate_over_time(String year, String month, String day, String start_time, String end_time, Integer break_time) {
-		TimeChange timeChange = new TimeChange();
-		String str_start_time = timeChange.sqlTime(start_time);
-		String str_end_time = timeChange.sqlTime(end_time);
-		LocalDateTime local_start_time = timeChange.getLocalDateTime(year, month, day, str_start_time);
-		LocalDateTime local_end_time = timeChange.getLocalDateTime(year, month, day, str_end_time);
-		Integer work_time = (int) ChronoUnit.MINUTES.between(local_start_time, local_end_time);
-		Integer over_time = work_time - 480 - break_time;
+	public Integer calculate_over_time(String work_pattern, String year, String month, String day, String start_time, String end_time, Integer break_time) {
+		
+		Integer over_time = 0;
+		
+		if(work_pattern.equals("normal")) {
+			TimeChange timeChange = new TimeChange();
+			String str_start_time = timeChange.sqlTime(start_time);
+			String str_end_time = timeChange.sqlTime(end_time);
+			LocalDateTime local_start_time = timeChange.getLocalDateTime(year, month, day, str_start_time);
+			LocalDateTime local_end_time = timeChange.getLocalDateTime(year, month, day, str_end_time);
+			Integer work_time = (int) ChronoUnit.MINUTES.between(local_start_time, local_end_time);
+			over_time = work_time - 480 - break_time;
+		}
 		return over_time;
 	}
 }

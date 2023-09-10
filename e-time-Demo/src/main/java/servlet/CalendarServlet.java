@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -36,6 +37,8 @@ public class CalendarServlet extends HttpServlet {
 			response.sendRedirect("CreateCalendarServlet");
 			return;
 		}
+		Calendar calendar = Calendar.getInstance();
+		request.setAttribute("calendar", calendar);
 		request.setAttribute("calendarList", calendarList);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/monthlyReportCalendar.jsp");
@@ -47,7 +50,35 @@ public class CalendarServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		Integer year = Integer.parseInt(request.getParameter("year"));
+		Integer month = Integer.parseInt(request.getParameter("month"));
+		String change = request.getParameter("change");
+		
+		if(change.equals("last")) {
+			month -= 1;
+		} else if(change.equals("next")) {
+			month += 1;
+		}
+		
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<Clock_in_DTO> calendarList = new GetCalendar().change(user_id, year, month);
+		if(calendarList.size() == 0) {
+			response.sendRedirect("CreateCalendarServlet");
+			return;
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month - 1);
+		
+		request.setAttribute("calendar", calendar);
+		request.setAttribute("calendarList", calendarList);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/monthlyReportCalendar.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

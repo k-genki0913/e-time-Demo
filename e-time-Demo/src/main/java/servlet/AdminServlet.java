@@ -35,7 +35,7 @@ public class AdminServlet extends HttpServlet {
 		if(adminFlag == 1) {
 			url = "WEB-INF/jsp/admin.jsp";
 		} else {
-			response.sendRedirect("WEB-INF/jsp/home.jsp");
+			response.sendRedirect("HomeServlet");
 			return;
 		}
 		
