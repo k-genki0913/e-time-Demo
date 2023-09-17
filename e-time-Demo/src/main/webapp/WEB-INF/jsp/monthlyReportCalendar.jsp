@@ -151,6 +151,24 @@
 			</c:forEach>
 		</table>
 	</c:otherwise>
-</c:choose>
+</c:choose><br>
+<p>出勤日数：<c:out value="${workingDay }" /></p>
+<p>合計労働時間：<c:out value="${totalWorkTime }" /></p>
+<p>合計残業時間：<c:out value="${totalOverTime }" /></p>
+<p>休日出勤回数：<c:out value="${work_on_a_Day }" /></p>
+<p>休日出勤労働時間：<c:out value="${totalWork_on_a_day_Hour }" /></p>
+<p>休日出勤残業時間：<c:out value="${totalWork_on_a_day_OverTime }" /></p>
+<form action="ReportApplyServlet" method="GET">
+<input type="hidden" name="year" value="<%=year %>">
+<input type="hidden" name="month" value="<%=month %>">
+<input type="hidden" name="workingDay" value="${workingDay }">
+<input type="hidden" name="totalWorkTime" value="${totalWorkTime }">
+<input type="hidden" name="totalOverTime" value="${totalOverTime }">
+<input type="hidden" name="work_on_a_Day" value="${work_on_a_Day }">
+<input type="hidden" name="totalWork_on_a_day_Hour" value="${totalWork_on_a_day_Hour }">
+<input type="hidden" name="totalWork_on_a_day_OverTime" value="${totalWork_on_a_day_OverTime }">
+<input type="submit" value="勤怠申請">
+<p>※一度申請すると個人では修正出来ません。修正が必要な場合は管理部へお問い合わせください</p>
+</form>
 </body>
 </html>

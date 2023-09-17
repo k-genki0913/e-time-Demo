@@ -43,7 +43,7 @@ public class GetCalendar {
 		List<Clock_in_DTO> calendarList = new ArrayList<>();
 		
 		int start_Day = 1;
-		int last_Day = getLastDay();
+		int last_Day = getTargetLastDay(year, month);
 		
 		Date start_date = changeDate(year, month, start_Day);
 		Date last_date = changeDate(year, month, last_Day);
@@ -59,6 +59,14 @@ public class GetCalendar {
 		
 		return sortedCalendarList;
 		
+	}
+	
+	private int getTargetLastDay(int year, int month) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, 0);
+		int targetLastDay = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		return targetLastDay;
 	}
 	
 	private int getLastDay() {

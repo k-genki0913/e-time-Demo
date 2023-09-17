@@ -52,6 +52,11 @@ public class CreateClock_in_DTO {
 			Integer work_time = (int) ChronoUnit.MINUTES.between(local_start_time, local_end_time);
 			over_time = work_time - 480 - break_time;
 		}
+		
+		if(over_time < 0) {
+			over_time = 0;
+		}
+		
 		return over_time;
 	}
 }
