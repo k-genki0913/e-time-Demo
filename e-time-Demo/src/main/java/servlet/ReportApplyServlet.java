@@ -19,6 +19,7 @@ import dao.Users_UsersRole_UserDepartment_DAO;
 import dto.Monthly_Report_DTO;
 import dto.User_Department_DTO;
 import dto.User_Role_DTO;
+import model.MonthlyReportApply;
 import model.ReportApplyCheck;
 import model.UpdateDate;
 
@@ -115,11 +116,22 @@ public class ReportApplyServlet extends HttpServlet {
 		Monthly_Report_DTO monthly_report_DTO = new Monthly_Report_DTO(year, month, user_id, workingDay,totalWorkTime, totalOverTime,
 					work_on_a_day, totalWork_on_a_day_Hour, totalWork_on_a_day_OverTime, updateDate, user_id);
 		
+		String role_id = new User_Role_DAO().getUser_Role(user_id).getRole_id();
 		String smg_user_id = request.getParameter("smg_user_id");
 		String mg_user_id = request.getParameter("mg_user_id");
 		String gm_user_id = request.getParameter("gm_user_id");
 		
-		
+		String errorMsg = new MonthlyReportApply().regist(monthly_report_DTO, smg_user_id, mg_user_id, gm_user_id, role_id);
+		if(errorMsg.equals("")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/applyComplete.jsp");
+			dispatcher.forward(request, response);
+			return;
+		} else {
+			request.setAttribute("errorMsg", errorMsg);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/applyConfirm.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 	}
 
 }

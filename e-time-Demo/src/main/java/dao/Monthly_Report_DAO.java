@@ -19,7 +19,7 @@ public class Monthly_Report_DAO {
 		
 		String sql = "SELECT monthly_report_id, target_year, target_month, user_id, workingDay, total_working_hours, "
 				+ "total_overtime_hours, work_on_a_day, totalWork_on_a_day_Hour, totalWork_on_a_day_Overtime, updated_date, updated_user "
-				+ "FROM Monthly_Report WHERE target_year = ? and target_month = ?, user_id = ?";
+				+ "FROM Monthly_Report WHERE target_year = ? and target_month = ? and user_id = ?";
 		
 		try {
 			con = BaseDAO.getConnection();

@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:if test="${not empty errorMsg }" >
+	<p><c:out value="${errorMsg }" /></p>
+</c:if>
 <h2>申請内容</h2>
 <p><c:out value="${monthly_report_DTO.target_year }" />年<c:out value="${monthly_report_DTO.target_month }" />月</p>
 <p>出勤日数：<c:out value="${monthly_report_DTO.workingDay }" />日</p>
