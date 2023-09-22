@@ -20,6 +20,7 @@
 <a href="CreateCalendarServlet">カレンダー作成</a>
 <a href="MonthlyReportServlet">勤怠入力画面</a>
 <a href="CalendarServlet">カレンダー</a>
+<a href="ApplyListServlet">勤怠承認画面</a>
 <a href="LogoutServlet">ログアウト</a>
 </body>
 </html>

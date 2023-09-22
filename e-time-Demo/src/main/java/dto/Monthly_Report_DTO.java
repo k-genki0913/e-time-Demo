@@ -2,11 +2,14 @@ package dto;
 
 import java.sql.Date;
 
+import model.User_id_change_Name;
+
 public class Monthly_Report_DTO {
 	private Integer monthly_report_id;
 	private Integer target_year;
 	private Integer target_month;
 	private String user_id;
+	private String name;
 	private Integer workingDay;
 	private Double total_working_hours;
 	private Double total_overtime_hours;
@@ -81,6 +84,12 @@ public class Monthly_Report_DTO {
 	
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	
+	public String getName() {
+		User_id_change_Name obj = new User_id_change_Name();
+		this.name = obj.execute(this.user_id);
+		return this.name;
 	}
 	
 	public Integer getWorkingDay() {

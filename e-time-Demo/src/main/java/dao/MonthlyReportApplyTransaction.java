@@ -24,7 +24,7 @@ public class MonthlyReportApplyTransaction {
 		
 		String insert_Monthly_Report_ApplyList_Sql = "INSERT INTO Monthly_Report_ApplyList(monthly_report_id, approve_level, approve_user_id_1, approve_role_1, "
 													+ "approve_1, approve_user_id_2, approve_role_2, approve_2, updated_date) "
-													+ "VALUES(?, 1, ?, 'TechSBM', 1, ?, 'TechMG', 1, ?)";
+													+ "VALUES(?, 1, ?, 'TechSBM', 0, ?, 'TechMG', 0, ?)";
 		
 		int insert_Monthly_report_result = 0;
 		int monthly_report_id = 0;
@@ -114,7 +114,7 @@ public String applyMonthlyReport(String approve_user_id, String role_id, Monthly
 		
 		String insert_Monthly_Report_ApplyList_Sql = "INSERT INTO Monthly_Report_ApplyList(monthly_report_id, approve_level, approve_user_id_1, approve_role_1, "
 													+ "approve_1, updated_date) "
-													+ "VALUES(?, 1, ?, ?, 1, ?)";
+													+ "VALUES(?, 1, ?, ?, 0, ?)";
 		
 		int insert_Monthly_report_result = 0;
 		int monthly_report_id = 0;
