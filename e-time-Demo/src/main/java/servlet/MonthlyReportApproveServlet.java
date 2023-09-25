@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.Monthly_Report_ApplyList_DAO;
 import dao.Monthly_Report_DAO;
+import dao.User_Role_DAO;
 import dto.Monthly_Report_DTO;
 import model.Monthly_Report_List;
 
@@ -57,7 +59,27 @@ public class MonthlyReportApproveServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		String role_id = new User_Role_DAO().getUser_Role(user_id).getRole_id();
+		
+		Integer monthly_report_id = Integer.parseInt(request.getParameter("monthly_report_id"));
+		String judgement = request.getParameter("judgement");
+		
+		Monthly_Report_ApplyList_DAO applyList_DAO = new Monthly_Report_ApplyList_DAO();
+		boolean result = false;
+		
+		if(role_id.equals("TechSBM")) {
+			if(judgement.equals("approve")) {
+				result = applyList_DAO.techSMG_FirstApprove(monthly_report_id, 2, 1);
+			} else if(judgement.equals("denial")) {
+				result = applyList_DAO.techSMG_FirstApprove(monthly_report_id, 0, 99);
+			}
+		} else {
+			
+		}
+		
 	}
 
 }

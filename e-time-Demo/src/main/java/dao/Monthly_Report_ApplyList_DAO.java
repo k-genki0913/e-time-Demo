@@ -10,6 +10,46 @@ import java.util.List;
 import dto.Monthly_Report_ApplyList_DTO;
 
 public class Monthly_Report_ApplyList_DAO {
+	
+	public boolean techSMG_FirstApprove(Integer monthly_report_id, Integer approve_level, Integer approve) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int sqlResult = 0;
+		
+		String sql = "UPDATE MONTHLY_REPORT_APPLYLIST SET APPROVE_LEVEL = ?, APPROVE_1 = ? WHERE MONTHLY_REPORT_ID = ?";
+		
+		try {
+			con = BaseDAO.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, approve_level);
+			pstmt.setInt(2, approve);
+			pstmt.setInt(3, monthly_report_id);
+			
+			sqlResult = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			System.out.println("Monthly_Report_ApplyListテーブルの更新に失敗しました");
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch(SQLException ignore) {}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch(SQLException ignore) {}
+			}
+		}
+		boolean result = false;
+		if(sqlResult == 1) {
+			result = true;
+		}
+		return result;
+	}
+	
 	public List<Monthly_Report_ApplyList_DTO> getList(String user_id){
 		Connection con = null;
 		PreparedStatement pstmt = null;
